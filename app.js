@@ -7,6 +7,15 @@ var app     = express()
 var ejs     = require('ejs')
 var multer  = require('multer')
 var uploader= multer({dest: 'uploads/'})
+var mysql   = require('mysql')
+var database= {
+	connectionLimit: 100,
+	user: 'vin',
+	password: 'diesel',
+	host: '127.0.0.1',
+	database: 'easy_car'
+}
+var pool    = mysql.createPool(database)
 app.listen(4000)
 app.engine('html', ejs.renderFile)
 app.get('/', showHomePage)
@@ -17,8 +26,18 @@ app.post('/login', uploader.single(), checkLogin)
 app.use( express.static('public') )
 
 function checkLogin(req, res) {
-	// req.body.user
-	// req.body.password
+	pool.query(`select * from member
+		where password = sha2(?, 512) and
+			name = ?`,
+		[req.body.password, req.body.user],
+		(error, data) => {
+			if (data.length == 0) {
+				res.redirect("/login?Wrong Password")
+			} else {
+				res.redirect("/")
+			}
+		}
+	)
 }
 
 function showHomePage(req, res) {

@@ -59,6 +59,19 @@ function createCard() {
 	return parseInt( Math.random() * 1000000000 )
 }
 
+function extractCard(req) {
+	var cookie = req.get('cookie')
+	if (cookie == null) cookie = ''
+	cookie = cookie + ';'
+	var start = cookie.indexOf('card=')
+	if (start == -1) {
+		return ''
+	} else {
+		var stop = cookie.indexOf(';', start)
+		return cookie.substring(start + 5, stop)
+	}
+}
+
 function showHomePage(req, res) {
 	res.render('index.html')
 }
@@ -69,5 +82,10 @@ function showLoginPage(req, res) {
 	res.render('login.html')
 }
 function showPostPage(req, res) {
-	res.render('post.html')
+	var card = extractCard(req)
+	if (approved[card]) {
+		res.render('post.html')
+	} else {
+		res.redirect('/login')
+	}
 }

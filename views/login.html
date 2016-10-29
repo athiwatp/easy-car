@@ -1,7 +1,26 @@
 <% include header.html %>
-
-<form>
-
-</form>
+<style>
+	form { 
+		max-width: 280px; 
+		margin: 0 auto; 
+	}
+	input { margin-bottom: 8px; }
+</style>
+<div class="container">
+	<form>
+		<h4>Log In</h4>
+		<input class='form-control'
+			placeholder='User Name or Email'
+			autofocus
+			name='user'>
+		<input class='form-control'
+			placeholder='Password',
+			type='password'
+			name='password'>
+		<button type='submit'
+			class='btn btn-primary btn-block'
+		>Log In</button>
+	</form>
+</div>
 
 <% include footer.html %>

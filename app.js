@@ -16,10 +16,10 @@ var database= {
 	database: 'easy_car'
 }
 var pool    = mysql.createPool(database)
+var approved= [ ]
 app.listen(4000)
 app.engine('html', ejs.renderFile)
 
-app.use(showTime)
 app.get('/', showHomePage)
 app.get('/search', showSearchPage)
 app.get('/login', showLoginPage)
@@ -46,10 +46,17 @@ function checkLogin(req, res) {
 			if (data.length == 0) {
 				res.redirect("/login?Wrong Password")
 			} else {
+				var card = createCard()
+				res.set('Set-Cookie', 'card='+card)
+				approved[card] = data[0]
 				res.redirect("/")
 			}
 		}
 	)
+}
+
+function createCard() {
+	return parseInt( Math.random() * 1000000000 )
 }
 
 function showHomePage(req, res) {

@@ -18,12 +18,24 @@ var database= {
 var pool    = mysql.createPool(database)
 app.listen(4000)
 app.engine('html', ejs.renderFile)
+
+app.use(showTime)
 app.get('/', showHomePage)
 app.get('/search', showSearchPage)
 app.get('/login', showLoginPage)
 app.get('/post', showPostPage)
 app.post('/login', uploader.single(), checkLogin)
 app.use( express.static('public') )
+app.use( showError )
+
+function showError(req, res, next) {
+	res.status(404).render('error.html')
+}
+
+function showTime(req, res, next) {
+	console.log(new Date())
+	next()
+}
 
 function checkLogin(req, res) {
 	pool.query(`select * from member

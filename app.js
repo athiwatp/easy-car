@@ -11,6 +11,7 @@ app.get('/', showHomePage)
 app.get('/search', showSearchPage)
 app.get('/login', showLoginPage)
 app.get('/post', showPostPage)
+app.use( express.static('public') )
 
 function showHomePage(req, res) {
 	res.render('index.html')

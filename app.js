@@ -26,7 +26,7 @@ app.get('/login', showLoginPage)
 app.get('/post', showPostPage)
 app.post('/login', uploader.single(), checkLogin)
 app.get('/profile', showProfilePage)
-
+app.get('/logout', showThankyouPage)
 app.use( express.static('public') )
 app.use( showError )
 
@@ -91,6 +91,7 @@ function showPostPage(req, res) {
 		res.redirect('/login')
 	}
 }
+
 function showProfilePage(req, res) {
 	var card = extractCard(req)
 	if (approved[card]) {
@@ -98,4 +99,10 @@ function showProfilePage(req, res) {
 	} else {
 		res.redirect('/login')
 	}
+}
+
+function showThankyouPage(req, res) {
+	var card = extractCard(req)
+	delete approved[card]
+	res.render('thankyou.html')
 }

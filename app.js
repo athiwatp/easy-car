@@ -151,7 +151,7 @@ function showPost(req, res) {
 		[req.params.id],
 		(error, data) => {
 			if (data == null || data.length == 0) {
-				data = []
+				data = [{}]
 			}
 			res.render('view.html', {post: data[0]})
 		})

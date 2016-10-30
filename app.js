@@ -20,13 +20,14 @@ var approved= [ ]
 app.listen(4000)
 app.engine('html', ejs.renderFile)
 
-app.get('/', showHomePage)
-app.get('/search', showSearchPage)
-app.get('/login', showLoginPage)
-app.get('/post', showPostPage)
+app.get ('/', showHomePage)
+app.get ('/search', showSearchPage)
+app.get ('/login', showLoginPage)
+app.get ('/post', showPostPage)
+app.post('/post', uploader.single('photo'), savePost)
 app.post('/login', uploader.single(), checkLogin)
-app.get('/profile', showProfilePage)
-app.get('/logout', showThankyouPage)
+app.get ('/profile', showProfilePage)
+app.get ('/logout', showThankyouPage)
 app.use( express.static('public') )
 app.use( showError )
 
@@ -105,4 +106,14 @@ function showThankyouPage(req, res) {
 	var card = extractCard(req)
 	delete approved[card]
 	res.render('thankyou.html')
+}
+
+function savePost(req, res) {
+	// req.body.topic
+	var card = extractCard(req)
+	if (approved[card]) {
+		// 
+	} else {
+		res.redirect("/login")
+	}
 }

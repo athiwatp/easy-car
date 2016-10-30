@@ -112,8 +112,36 @@ function savePost(req, res) {
 	// req.body.topic
 	var card = extractCard(req)
 	if (approved[card]) {
-		// 
+		pool.query(`insert into product(topic, detail, make,
+			model, submodel, year, color, mile, price,
+			gas, owner) values(?,?,?,?,?,?,?,?,?,?,?)`,
+			[req.body.topic, req.body.detail, req.body.brand,
+			req.body.model, req.body.submodel, req.body.year,
+			req.body.color, req.body.mile, req.body.price,
+			req.body.gas, approved[card].id],
+			(error, result) => {
+				res.redirect('/profile')
+			}
+		)
 	} else {
 		res.redirect("/login")
 	}
 }
+
+/*
+create table product(
+    id         serial,    
+    topic      varchar(1000),
+    detail     varchar(10000),
+    make       varchar(100),
+    model      varchar(200),
+    submodel   varchar(200),
+    year       integer,
+    color      varchar(100),
+    mile       integer,
+    price      integer,
+    gas        varchar(10),
+    owner      bigint
+);
+
+*/

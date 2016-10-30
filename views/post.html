@@ -1,6 +1,6 @@
 <% include header.html %>
 <style>
-	input, textarea {
+	input, textarea, select {
 		margin-bottom: 8px;
 	}
 </style>
@@ -15,6 +15,12 @@
 <input name='year' placeholder='Year' class='form-control' />
 <input name='mile' placeholder='Mile' class='form-control' />
 <input name='color' placeholder='Color' class='form-control' />
+<select name='gas' class='form-control'>
+	<option>NO</option>
+	<option>NGV</option>
+	<option>LPG</option>
+</select>
+<input name='price' placeholder='Price' class='form-control' />
 <input name='photo' type='file' class='btn btn-primary' />
 <textarea name='detail' placeholder='Detail' 
 class='form-control' rows='8'></textarea>

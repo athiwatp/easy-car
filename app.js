@@ -25,6 +25,8 @@ app.get('/search', showSearchPage)
 app.get('/login', showLoginPage)
 app.get('/post', showPostPage)
 app.post('/login', uploader.single(), checkLogin)
+app.get('/profile', showProfilePage)
+
 app.use( express.static('public') )
 app.use( showError )
 
@@ -49,7 +51,7 @@ function checkLogin(req, res) {
 				var card = createCard()
 				res.set('Set-Cookie', 'card='+card)
 				approved[card] = data[0]
-				res.redirect("/")
+				res.redirect("/profile")
 			}
 		}
 	)
@@ -85,6 +87,14 @@ function showPostPage(req, res) {
 	var card = extractCard(req)
 	if (approved[card]) {
 		res.render('post.html')
+	} else {
+		res.redirect('/login')
+	}
+}
+function showProfilePage(req, res) {
+	var card = extractCard(req)
+	if (approved[card]) {
+		res.render('profile.html')
 	} else {
 		res.redirect('/login')
 	}

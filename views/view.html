@@ -1,12 +1,14 @@
 <% include header.html %>
-<% if (post.topic) { %>
-	<h3><%= post.topic %></h3>
-	<p><%= post.detail %></p>
-	<% if (post.photo && post.photo.length > 0) { %>
-		<img src='/<%= post.photo %>' >
-	<% } %>
+<div class='container'>
+	<% if (post.topic) { %>
+		<h3><%= post.topic %></h3>
+		<p><%= post.detail %></p>
+		<% if (post.photo && post.photo.length > 0) { %>
+			<img src='/<%= post.photo %>' >
+		<% } %>
 
-<% } else { %>
-	<h3>Not Found</h3>
-<% } %>
+	<% } else { %>
+		<h3>Not Found</h3>
+	<% } %>
+</div>
 <% include footer.html %>

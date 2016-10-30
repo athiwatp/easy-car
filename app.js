@@ -147,8 +147,15 @@ function savePost(req, res) {
 
 function showSearchResult(req, res) {
 	pool.query(`select distinct * from product
-		where detail like ?
-	`, ['%' + req.query.data + '%'],
+		where detail like ? or
+		topic like ? or
+		make = ? or 
+		model = ?
+	`, ['%' + req.query.data + '%',
+		'%' + req.query.data + '%',
+		req.query.data,
+		req.query.data
+	],
 	(error, data) => {
 		res.render('result.html', {data: data })
 	})

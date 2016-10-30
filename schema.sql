@@ -26,12 +26,13 @@ alter table product add photo varchar(200);
 
 create table member(
     id      serial,
-    name    varchar(200),
+    name    varchar(200) unique,
     first_name varchar(200),
     last_name  varchar(200),
-    phone      varchar(200)
+    phone      varchar(200),
+    email      varchar(200) unique,
+    password char(2000)
 );
-alter table member add password char(2000);
 
 insert into member(name, first_name, 
 last_name, phone)

@@ -179,5 +179,12 @@ function showRegisterPage(req, res) {
 }
 
 function saveNewMember(req, res) {
-	//
+	pool.query(`
+		insert into member(name, first_name, last_name,
+			phone, email, password)
+		values(?,?,?,?,?, sha2(?, 512) )
+	`, [ req.body.name, req.body.first_name, req.body.last_name,
+		req.body.phone, req.body.email, req.body.password ],
+		res.redirect('/login')
+	)
 }

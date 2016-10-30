@@ -1,6 +1,11 @@
+drop user vin@'%';
+drop database easy_car;
+
 create user vin@'%' identified by 'diesel';
 create database easy_car default charset='utf8';
 grant all on easy_car.* to vin@'%';
+
+use easy_car;
 
 create table product(
     id         serial,    

@@ -29,6 +29,8 @@ app.post('/login', uploader.single(), checkLogin)
 app.get ('/profile', showProfilePage)
 app.get ('/logout', showThankyouPage)
 app.get ('/result', showSearchResult)
+app.get ('/view/:id', showPost)
+
 app.use( express.static('public') )
 app.use( showError )
 
@@ -142,4 +144,15 @@ function showSearchResult(req, res) {
 	(error, data) => {
 		res.render('result.html', {data: data })
 	})
+}
+
+function showPost(req, res) {
+	pool.query('select * from product where id = ?',
+		[req.params.id],
+		(error, data) => {
+			if (data == null || data.length == 0) {
+				data = []
+			}
+			res.render('view.html', {post: data[0]})
+		})
 }

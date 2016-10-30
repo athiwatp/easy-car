@@ -30,8 +30,10 @@ create table member(
     last_name  varchar(200),
     phone      varchar(200)
 );
+alter table member add password char(2000);
 
 insert into member(name, first_name, 
 last_name, phone)
 values('vin', 'Vin', 'Diesel', '08312345678');
 
+update member set password = sha2('xXx', 512) where id=1;

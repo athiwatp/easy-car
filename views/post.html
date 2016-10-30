@@ -1,0 +1,24 @@
+<% include header.html %>
+<style>
+	input, textarea {
+		margin-bottom: 8px;
+	}
+</style>
+<div class='container'>
+<h3>New Post</h3>
+<form method='post' enctype='multipart/form-data'>
+<input name='topic' placeholder='Topic' 
+	class='form-control' autofocus />
+<input name='brand' placeholder='Brand' class='form-control' />
+<input name='model' placeholder='Model' class='form-control' />
+<input name='submodel' placeholder='Submodel' class='form-control' />
+<input name='year' placeholder='Year' class='form-control' />
+<input name='mile' placeholder='Mile' class='form-control' />
+<input name='color' placeholder='Color' class='form-control' />
+<input name='photo' type='file' class='btn btn-primary' />
+<textarea name='detail' placeholder='Detail' 
+class='form-control' rows='8'></textarea>
+<button class='btn btn-primary' type='submit'>Post</butotn>
+</form>
+</div>
+<% include footer.html %>

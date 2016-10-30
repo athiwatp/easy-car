@@ -31,6 +31,8 @@ app.get ('/profile', showProfilePage)
 app.get ('/logout', showThankyouPage)
 app.get ('/result', showSearchResult)
 app.get ('/view/:id', showPost)
+app.get ('/register', showRegisterPage)
+app.post('/register', uploader.single(), saveNewMember)
 
 app.use( express.static('public') )
 app.use( express.static('uploads') )
@@ -170,4 +172,12 @@ function showPost(req, res) {
 			}
 			res.render('view.html', {post: data[0]})
 		})
+}
+
+function showRegisterPage(req, res) {
+	res.render('register.html')
+}
+
+function saveNewMember(req, res) {
+	//
 }

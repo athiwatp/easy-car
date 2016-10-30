@@ -3,7 +3,9 @@
 <div class='container'>
 
 <% for (var i = 0; i < data.length; i++) { %>
-	<b><%= data[i].topic %></b>
+	<a href='/view/<%= data[i].id %>'>
+		<b><%= data[i].topic %></b>
+	</a>
 	- <%= data[i].make %>
 	
 	<% if (data[i].model.length > 0) { %>
@@ -15,6 +17,7 @@
 	<% } %>
 	
 	<%= data[i].detail %>
+	<br>
 <% } %>
 </div>
 

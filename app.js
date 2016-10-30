@@ -28,6 +28,7 @@ app.post('/post', uploader.single('photo'), savePost)
 app.post('/login', uploader.single(), checkLogin)
 app.get ('/profile', showProfilePage)
 app.get ('/logout', showThankyouPage)
+app.get ('/result', showSearchResult)
 app.use( express.static('public') )
 app.use( showError )
 
@@ -128,20 +129,11 @@ function savePost(req, res) {
 	}
 }
 
-/*
-create table product(
-    id         serial,    
-    topic      varchar(1000),
-    detail     varchar(10000),
-    make       varchar(100),
-    model      varchar(200),
-    submodel   varchar(200),
-    year       integer,
-    color      varchar(100),
-    mile       integer,
-    price      integer,
-    gas        varchar(10),
-    owner      bigint
-);
-
-*/
+function showSearchResult(req, res) {
+	pool.query(`select distinct * from product
+		where detail like ?
+	`, ['%' + req.query.data + '%'],
+	(error, data) => {
+		res.render('result.html', {data: data })
+	})
+}

@@ -5,8 +5,15 @@
 <% for (var i = 0; i < data.length; i++) { %>
 	<b><%= data[i].topic %></b>
 	- <%= data[i].make %>
-	(<%= data[i].model %>)
-	ราคา <b><%= data[i].price %></b>
+	
+	<% if (data[i].model.length > 0) { %>
+		(<%= data[i].model %>)
+	<% } %>
+
+	<% if (data[i].price > 0) { %>
+		ราคา <b><%= data[i].price %></b>
+	<% } %>
+	
 	<%= data[i].detail %>
 <% } %>
 </div>

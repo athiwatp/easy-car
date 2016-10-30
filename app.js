@@ -33,6 +33,7 @@ app.get ('/result', showSearchResult)
 app.get ('/view/:id', showPost)
 
 app.use( express.static('public') )
+app.use( express.static('uploads') )
 app.use( showError )
 
 function showError(req, res, next) {

@@ -113,6 +113,12 @@ function savePost(req, res) {
 	// req.body.topic
 	var card = extractCard(req)
 	if (approved[card]) {
+		if (req.body.year == '')
+			req.body.year = 0
+		if (req.body.mile == '')
+			req.body.mile = 0
+		if (req.body.price == '')
+			req.body.price = 0
 		pool.query(`insert into product(topic, detail, make,
 			model, submodel, year, color, mile, price,
 			gas, owner) values(?,?,?,?,?,?,?,?,?,?,?)`,

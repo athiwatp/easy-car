@@ -1,0 +1,14 @@
+<% include header.html %>
+
+<div class='container'>
+
+<% for (var i = 0; i < data.length; i++) { %>
+	<b><%= data[i].topic %></b>
+	- <%= data[i].make %>
+	(<%= data[i].model %>)
+	ราคา <b><%= data[i].price %></b>
+	<%= data[i].detail %>
+<% } %>
+</div>
+
+<% include footer.html %>

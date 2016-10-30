@@ -22,6 +22,7 @@ create table product(
     owner      bigint
 );
 
+alter table product add photo varchar(200);
 
 create table member(
     id      serial,

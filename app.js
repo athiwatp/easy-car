@@ -112,7 +112,6 @@ function showThankyouPage(req, res) {
 }
 
 function savePost(req, res) {
-	// req.body.topic
 	var card = extractCard(req)
 	if (approved[card]) {
 		if (req.body.year == '')

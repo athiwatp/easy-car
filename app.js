@@ -2,6 +2,7 @@
 // https://github.com/codestar-work/easy-car
 
 // npm install express ejs mysql multer
+var fs      = require('fs')
 var express = require('express')
 var app     = express()
 var ejs     = require('ejs')
@@ -113,6 +114,12 @@ function showThankyouPage(req, res) {
 
 function savePost(req, res) {
 	var card = extractCard(req)
+	var fileName = ''
+	if (req.file) {
+		fileName = req.file.filename + '.png'
+		fs.rename('uploads/' + req.file.filename,
+				  'uploads/' + fileName)
+	}
 	if (approved[card]) {
 		if (req.body.year == '')
 			req.body.year = 0
@@ -122,11 +129,12 @@ function savePost(req, res) {
 			req.body.price = 0
 		pool.query(`insert into product(topic, detail, make,
 			model, submodel, year, color, mile, price,
-			gas, owner) values(?,?,?,?,?,?,?,?,?,?,?)`,
+			gas, owner, photo) 
+			values(?,?,?,?,?,?,?,?,?,?,?,?)`,
 			[req.body.topic, req.body.detail, req.body.brand,
 			req.body.model, req.body.submodel, req.body.year,
 			req.body.color, req.body.mile, req.body.price,
-			req.body.gas, approved[card].id],
+			req.body.gas, approved[card].id, fileName],
 			(error, result) => {
 				res.redirect('/profile')
 			}
